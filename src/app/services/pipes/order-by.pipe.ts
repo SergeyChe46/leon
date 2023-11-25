@@ -1,6 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Book } from 'src/app/models/book.interface';
-
+/**
+ * Сортирует строки в таблице по колонке и порядку(прямой/обратный).
+ */
 @Pipe({
   name: 'orderBy',
 })

@@ -1,7 +1,13 @@
 import { inject } from '@angular/core';
 import { CanActivateFn } from '@angular/router';
 import { RepositoryService } from '../services/repository.service';
-
+/**
+ * Если нет ни одного автора запрещает обращаться
+ * к другим страницам кроме /authors
+ * @param route
+ * @param state
+ * @returns
+ */
 export const authorsGuard: CanActivateFn = (route, state) => {
   let hasAuthors: boolean = false;
   inject(RepositoryService)

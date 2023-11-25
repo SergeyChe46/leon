@@ -40,7 +40,7 @@ export class RepositoryService implements BaseRepositoryInterface {
    * @returns
    */
   private parseEntities(storageFieldName: string): Book[] | Author[] {
-    let books = JSON.parse(localStorage.getItem(storageFieldName)!);
-    return books;
+    let entities = JSON.parse(localStorage.getItem(storageFieldName)!);
+    return entities;
   }
 }

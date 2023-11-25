@@ -41,8 +41,13 @@ export class BooksComponent implements OnInit {
     this.repositoryService.add(this.bookForm.value, this.storageFieldName);
     this.bookForm.reset();
     this.getAllBooks();
+    this.newBookId += 1;
   }
-
+  /**
+   * Находит автора и возвращает форматированное имя.
+   * @param id Автор
+   * @returns
+   */
   getAuthorName(id: number) {
     let author = this.authors.find((auth) => {
       return auth.id == id;
