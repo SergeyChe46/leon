@@ -1,0 +1,89 @@
+<form class="d-flex justify-content-center"
+      [formGroup]="authorForm">
+    <div class="col-sm-3">
+        <label>Фамилия</label>
+        <input formControlName="lastName"
+               type="text"
+               class="form-control"
+               placeholder="Фамилия">
+        <div>
+            <small class="text-danger"
+                   *ngIf="lastName.touched && lastName.invalid">
+                Обязательно для заполнения.
+            </small>
+        </div>
+
+    </div>
+    <div class="col-sm-3">
+        <label>Имя</label>
+        <input formControlName="firstName"
+               type="text"
+               class="form-control"
+               placeholder="Имя">
+        <div>
+            <small class="text-danger"
+                   *ngIf="firstName.touched && firstName.invalid">
+                Обязательно для заполнения.
+            </small>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <label>Отчество</label>
+        <input formControlName="midName"
+               type="text"
+               class="form-control"
+               placeholder="Отчество">
+    </div>
+    <div class="col-sm-3">
+        <label>Год рождения</label>
+        <input formControlName="birthDate"
+               type="number"
+               class="form-control"
+               placeholder="Год рождения">
+        <div>
+            <small class="text-danger"
+                   *ngIf="birthDate.touched && birthDate.invalid">
+                Обязательно для заполнения.
+            </small>
+        </div>
+    </div>
+</form>
+<div class="d-flex justify-content-center">
+
+    <button *ngIf="!authorIsExist; else replyAuthor"
+            [disabled]="authorForm.invalid"
+            (click)="onSubmit()"
+            class="btn btn-primary col-md-6 mt-2 mb-2">Создать</button>
+
+    <ng-template #replyAuthor>
+        <button disabled
+                class="btn btn-danger col-md-6 mt-2 mb-2">Такой автор уже есть</button>
+    </ng-template>
+
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Отчество</th>
+            <th scope="col">Год рождения</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="authors; else emptyAuthors">
+        <tr *ngFor="let author of authors">
+            <td>{{author.id}}</td>
+            <td>{{author.lastName}}</td>
+            <td>{{author.firstName}}</td>
+            <td>{{author.midName}}</td>
+            <td>{{author.birthDate}}</td>
+        </tr>
+    </tbody>
+    <ng-template #emptyAuthors>
+        <h3>
+            Авторов пока нет
+        </h3>
+    </ng-template>
+</table>

@@ -1,0 +1,72 @@
+<form class="d-flex justify-content-center"
+      [formGroup]="bookForm">
+    <div class="col-sm-2">
+        <label>Автор</label>
+        <select formControlName="authorId"
+                type="number"
+                class="form-control"
+                placeholder="Автор">
+            <option [ngValue]="null"
+                    disabled>Выберите автора</option>
+            <option *ngFor="let author of authors"
+                    [value]="author.id">{{author.firstName + ' ' + author.lastName}}</option>
+        </select>
+    </div>
+    <div class="col-sm-4">
+        <label>Название</label>
+        <input formControlName="title"
+               type="text"
+               class="form-control"
+               placeholder="Название">
+    </div>
+    <div class="col-sm-4">
+        <label>Издатель</label>
+        <input formControlName="publisher"
+               type="text"
+               class="form-control"
+               placeholder="Издатель">
+    </div>
+    <div class="col-sm-2">
+        <label>Год</label>
+        <input formControlName="publishYear"
+               type="number"
+               class="form-control"
+               placeholder="Год">
+    </div>
+</form>
+<div class="d-flex justify-content-center">
+    <button [disabled]="bookForm.invalid"
+            (click)="onSubmit()"
+            class="btn btn-primary col-md-6 mt-2 mb-2">Создать</button>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col"
+                (click)="setOrderColumn('id')">Автор</th>
+            <th scope="col"
+                (click)="setOrderColumn('title')">Название</th>
+            <th scope="col"
+                (click)="setOrderColumn('publisher')">Издатель</th>
+            <th scope="col"
+                (click)="setOrderColumn('publishYear')">Год</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="books; else emptyBooks">
+        <tr *ngFor="let book of books | orderBy: orderColumn:orderBy">
+            <td>{{book.id}}</td>
+            <td>{{getAuthorName(book.authorId)}}</td>
+            <td>{{book.title}}</td>
+            <td>{{book.publisher}}</td>
+            <td>{{book.publishYear}}</td>
+        </tr>
+    </tbody>
+    <ng-template #emptyBooks>
+        <h3>
+            Книг пока нет
+        </h3>
+    </ng-template>
+</table>
